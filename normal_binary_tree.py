@@ -168,9 +168,7 @@ def main():
     # print("bottom:", res.val)
 
     res = tree.pop_head()
-    print("head:", res.val)
-
-
+    print("\nhead:", res.val)
     print("new head:", tree.head.val)
     tree.parse_by_layer()
 

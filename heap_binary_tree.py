@@ -138,6 +138,96 @@ class HeapBinaryTree:
                 return res
 
 
+    def get_balance(self, node):
+        if node.left and node.right:
+            if (node.val >= node.left.val) and (node.val >= node.right.val):
+                return node
+            
+            elif (node.val >= node.left.val) and (node.val < node.right.val):
+                cur = node.pop_right()
+                
+                tmp_left = cur.pop_left()
+                tmp_right = cur.pop_right()
+
+                cur.left = node.pop_left()
+
+                node.left = tmp_left
+                node.right = tmp_right
+
+                res = self.get_balance(node)
+                cur.right = res
+                return cur
+            
+            elif (node.val < node.left.val) and (node.val >= node.right.val):
+                cur = node.pop_left()
+
+                tmp_left = cur.pop_left()
+                tmp_right = cur.pop_right()
+
+                cur.right = node.pop_right()
+
+                node.left = tmp_left
+                node.right = tmp_right
+
+                res = self.get_balance(node)
+                cur.left = res
+                return cur
+            
+
+            else:
+                if node.left.val >= node.right.val:
+                    cur = node.pop_left()
+
+                    tmp_left = cur.pop_left()
+                    tmp_right = cur.pop_right()
+
+                    cur.right = node.pop_right()
+
+                    node.left = tmp_left
+                    node.right = tmp_right
+
+                    res = self.get_balance(node)
+                    cur.left = res
+                    return cur
+                
+                else:
+
+                    cur = node.pop_right()
+                    
+                    tmp_left = cur.pop_left()
+                    tmp_right = cur.pop_right()
+
+                    cur.left = node.pop_left()
+
+                    node.left = tmp_left
+                    node.right = tmp_right
+
+                    res = self.get_balance(node)
+                    cur.right = res
+                    return cur
+
+
+        elif node.left:
+            if  node.val >= node.left.val:
+                return node
+            else:
+                cur = node.pop_left()
+                res = cur.heap_add_node(node)
+                return res
+
+        elif node.right:
+            if node.val >= node.right.val:
+                return node
+            else:
+                cur = node.pop_right()
+                res = cur.heap_add_node(node)
+                return res
+        else:
+            return node
+
+
+
+
     def pop_head(self):
         cur = self.head
 
@@ -152,7 +242,8 @@ class HeapBinaryTree:
         bottom.left = cur.pop_left()
         bottom.right = cur.pop_right()
 
-        self.head = bottom
+        res = self.get_balance(bottom)
+        self.head = res
 
         return cur
 
@@ -202,7 +293,7 @@ def main():
     # N = 100
     # node_list = [int(round(random.randint(0, 10*N)/N, 0)) for _ in range(N)]
 
-    print("#:",len(node_list))
+    print("\n#:",len(node_list))
     # print(node_list)
 
     tree = HeapBinaryTree()
@@ -212,6 +303,30 @@ def main():
     tree.parse_by_layer()
 
 
+
+    head = tree.pop_head()
+    print("\nhead:", head.val)
+    tree.parse_by_layer()
+
+    head = tree.pop_head()
+    print("\nhead:", head.val)
+    tree.parse_by_layer()
+
+    head = tree.pop_head()
+    print("\nhead:", head.val)
+    tree.parse_by_layer()
+
+    head = tree.pop_head()
+    print("\nhead:", head.val)
+    tree.parse_by_layer()
+
+    head = tree.pop_head()
+    print("\nhead:", head.val)
+    tree.parse_by_layer()
+
+    head = tree.pop_head()
+    print("\nhead:", head.val)
+    tree.parse_by_layer()
 
 
     return

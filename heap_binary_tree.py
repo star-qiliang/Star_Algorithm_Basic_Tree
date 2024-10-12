@@ -29,12 +29,11 @@ class Node:
             else:
                 self.right.random_add_node(node)
 
-
     def heap_add_node(self, node):
         if type(node)!= Node:
             node = Node(node)
 
-        if node.val>=self.val:
+        if node.val>self.val:
 
             if self.left and self.right:
                 node.left = self.pop_left()
@@ -80,7 +79,6 @@ class Node:
         node = self.right
         self.right = None
         return node
-
 
 
 class HeapBinaryTree:
@@ -137,7 +135,6 @@ class HeapBinaryTree:
 
                 return res
 
-
     def get_balance(self, node):
         if node.left and node.right:
             if (node.val >= node.left.val) and (node.val >= node.right.val):
@@ -173,7 +170,6 @@ class HeapBinaryTree:
                 cur.left = res
                 return cur
             
-
             else:
                 if node.left.val >= node.right.val:
                     cur = node.pop_left()
@@ -206,7 +202,6 @@ class HeapBinaryTree:
                     cur.right = res
                     return cur
 
-
         elif node.left:
             if  node.val >= node.left.val:
                 return node
@@ -224,9 +219,6 @@ class HeapBinaryTree:
                 return res
         else:
             return node
-
-
-
 
     def pop_head(self):
         cur = self.head
@@ -246,7 +238,6 @@ class HeapBinaryTree:
         self.head = res
 
         return cur
-
 
     def parse_by_layer(self):
 
@@ -302,8 +293,6 @@ def main():
 
     tree.parse_by_layer()
 
-
-
     head = tree.pop_head()
     print("\nhead:", head.val)
     tree.parse_by_layer()
@@ -327,7 +316,6 @@ def main():
     head = tree.pop_head()
     print("\nhead:", head.val)
     tree.parse_by_layer()
-
 
     return
 

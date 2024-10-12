@@ -18,16 +18,10 @@
 /library/
 /recycle.py
 /start_jupyter.bat
-/TAG_IMAGE_EXCEL_COLOR_REMAPPING.py
 /TAG_TO_BACKUP.py
 /model/
 /GitAddBasicFile.sh
-/start_conda_gucci_yolo.bat
-/start_jupyter_gucci_yolo.bat
-/start_run_gucci_yolo.bat
 /TAG_IMAGE_RESIZE.py
-/presentation_sudoku_images.pptx
-/ProgressMemo.py
 /TAG_XX.py
 /VSCodeStarter.py
 **/__pycache__/

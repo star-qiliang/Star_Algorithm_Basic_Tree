@@ -162,14 +162,15 @@ def main():
     for node in node_list:
         tree.random_add_node(node)
 
+    print("\nTree:")
     tree.parse_by_layer()
 
     # res = tree.pop_bottom()
     # print("bottom:", res.val)
 
     res = tree.pop_head()
-    print("\nhead:", res.val)
-    print("new head:", tree.head.val)
+    print("\nPop Head:", res.val)
+    print("New Head:", tree.head.val)
     tree.parse_by_layer()
 
 

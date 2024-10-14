@@ -72,8 +72,14 @@ class Node:
                 return res
             
     def pop_left_most(self, node):
+        if not node:
+            return None
+
         parent = node
         cur = node.left
+        if not cur:
+            return cur
+
         while cur.left:
             parent = cur
             cur = cur.left
@@ -83,13 +89,19 @@ class Node:
 
 
     def pop_right_most(self, node):
+        if not node:
+            return None
+
         parent = node
         cur = node.right
+        if not cur:
+            return cur
+
         while cur.right:
             parent = cur
             cur = cur.right
 
-        parent.right()
+        parent.pop_right()
         return cur
                         
     def search_and_pop(self, val):
@@ -282,6 +294,15 @@ def main():
     print("\ntarget_val:", target_val)
     res = target_node.val if target_node else None
     print("target_node:", res)
+
+
+    target_val = 2093
+    target_node = tree.search_and_pop(target_val)
+    print("\ntarget_val:", target_val)
+    res = target_node.val if target_node else None
+    print("target_node:", res)
+    tree.parse_by_layer()
+
 
     # head = tree.pop_head()
     # print("\nhead:", head.val)

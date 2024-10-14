@@ -72,17 +72,25 @@ class Node:
                 return res
             
     def pop_left_most(self, node):
-        pass
+        parent = node
+        cur = node.left
+        while cur.left:
+            parent = cur
+            cur = cur.left
 
-        res = node
-        return res
+        parent.pop_left()
+        return cur
+
 
     def pop_right_most(self, node):
-        pass
+        parent = node
+        cur = node.right
+        while cur.right:
+            parent = cur
+            cur = cur.right
 
-        res = node
-        return res
-
+        parent.right()
+        return cur
                         
     def search_and_pop(self, val):
         node = self

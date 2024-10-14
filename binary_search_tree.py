@@ -156,7 +156,7 @@ class Node:
                 else:
                     new_root = sub_right # ???
 
-            return target_node, new_root # new root
+            return target_node, new_root
 
         elif val < node.val:
             if not node.left:
@@ -167,9 +167,6 @@ class Node:
                 if not target_node:
                     return None, node
                 else:
-                    # if target_node is node.left:
-                    #     node.pop_left()
-
                     node.left = new_root
 
                     return target_node, node
@@ -183,9 +180,6 @@ class Node:
                 if not target_node:
                     return None, node
                 else:
-                    # if target_node is node.right:
-                    #     node.pop_right()
-
                     node.right = new_root
 
                     return target_node, node

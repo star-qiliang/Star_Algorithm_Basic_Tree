@@ -39,7 +39,7 @@ class Node:
             else:
                 self.right.random_add_node(node)
 
-    def binrach_search_add_node(self, node):
+    def binary_search_add_node(self, node):
         if type(node)!= Node:
             node = Node(node)
 
@@ -47,12 +47,12 @@ class Node:
             if not self.right:
                 self.right = node
             else:
-                self.right.binrach_search_add_node(node)
+                self.right.binary_search_add_node(node)
         else:
             if not self.left:
                 self.left = node
             else:
-                self.left.binrach_search_add_node(node)
+                self.left.binary_search_add_node(node)
 
     def search(self, val):
         node = self
@@ -120,13 +120,12 @@ class Node:
             sub_right = target_node.pop_right()
 
             if (not sub_left) and (not sub_right):
-                return target_node, None
+                return target_node, None # New Root
             
-
             elif sub_left and sub_right:
                 if random.randint(0,1):
                     new_root = self.pop_left_most(sub_right)
-                    if new_root:
+                    if new_root: # sub_right has no left 
                         new_root.left = sub_left
                         new_root.right = sub_right
                     else:
@@ -138,7 +137,7 @@ class Node:
                     if new_root:
                         new_root.left = sub_left
                         new_root.right = sub_right
-                    else:
+                    else: # sub_left has no right
                         new_root = sub_left
                         new_root.right = sub_right
 
@@ -147,14 +146,14 @@ class Node:
                 if new_root:
                     new_root.left = sub_left
                 else:
-                    new_root = sub_left # ???
+                    new_root = sub_left # sub_left has no right
 
             else:
                 new_root = self.pop_left_most(sub_right)
                 if new_root:
                     new_root.right = sub_right
                 else:
-                    new_root = sub_right # ???
+                    new_root = sub_right # sub_right has no left 
 
             return target_node, new_root
 
@@ -197,7 +196,7 @@ class BinarySearchTree:
         if not self.head:
             self.head = node
         else:
-            self.head.binrach_search_add_node(node)
+            self.head.binary_search_add_node(node)
 
 
     def search(self, val):
@@ -209,64 +208,6 @@ class BinarySearchTree:
         target_node, new_root = self.head.search_and_pop(val)
         self.head = new_root
         return target_node
-
-
-
-    def pop_bottom(self): # for pop_head()
-        cur = self.head
-
-        if not cur:
-            return None
-                
-        if (not cur.left) and (not cur.right):
-            self.head = None
-            return cur
-
-        parent = None
-        left_or_right = ''
-        while cur:
-            if cur.left and cur.right:
-                if random.randint(0,1):
-                    left_or_right = 'left'
-                    parent = cur
-                    cur = cur.left
-                else:
-                    left_or_right = 'right'
-                    parent = cur
-                    cur = cur.right
-            elif cur.left:
-                left_or_right = 'left'
-                parent = cur
-                cur = cur.left
-            
-            elif cur.right:
-                left_or_right = 'right'
-                parent = cur
-                cur = cur.right
-            else:
-                if left_or_right=='left':
-                    res = parent.pop_left()
-                else:
-                    res = parent.pop_right()
-
-                return res
-
-
-    def pop_head(self):
-        cur = self.head
-
-        if not cur:
-            return None
-        
-        if (not cur.left) and (not cur.right):
-            self.head = None
-            return cur
-        
-        bottom = self.pop_bottom()
-        bottom.left = cur.pop_left()
-        bottom.right = cur.pop_right()
-
-        return bottom
 
     def parse_by_layer(self):
 

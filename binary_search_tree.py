@@ -113,24 +113,40 @@ class Node:
 
             if (not sub_left) and (not sub_right):
                 return target_node, None
+            
 
-            if random.randint(0,1):
-                new_root = self.pop_left_most(sub_right)
-                if new_root:
-                    new_root.left = sub_left
-                    new_root.right = sub_right
+            elif sub_left and sub_right:
+                if random.randint(0,1):
+                    new_root = self.pop_left_most(sub_right)
+                    if new_root:
+                        new_root.left = sub_left
+                        new_root.right = sub_right
+                    else:
+                        new_root = sub_right 
+                        new_root.left = sub_left
+
                 else:
-                    new_root = sub_right 
-                    new_root.left = sub_left
+                    new_root = self.pop_right_most(sub_left)
+                    if new_root:
+                        new_root.left = sub_left
+                        new_root.right = sub_right
+                    else:
+                        new_root = sub_left
+                        new_root.right = sub_right
 
-            else:
+            elif sub_left:
                 new_root = self.pop_right_most(sub_left)
                 if new_root:
                     new_root.left = sub_left
+                else:
+                    new_root = None
+
+            else:
+                new_root = self.pop_left_most(sub_right)
+                if new_root:
                     new_root.right = sub_right
                 else:
-                    new_root = sub_left
-                    new_root.right = sub_right
+                    new_root = None
 
             return target_node, new_root # new root
 

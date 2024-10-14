@@ -165,7 +165,7 @@ class Node:
                 target_node, new_root = node.left.search_and_pop(val)
 
                 if not target_node:
-                    return None, new_root
+                    return None, node
                 else:
                     # if target_node is node.left:
                     #     node.pop_left()
@@ -181,7 +181,7 @@ class Node:
                 target_node, new_root = node.right.search_and_pop(val)
 
                 if not target_node:
-                    return None, new_root
+                    return None, node
                 else:
                     # if target_node is node.right:
                     #     node.pop_right()
@@ -375,6 +375,15 @@ def main():
     tree.parse_by_layer()
 
 
+    target_val = -1
+    target_node = tree.search_and_pop(target_val)
+    print("\ntarget_val:", target_val)
+    res = target_node.val if target_node else None
+    print("target_node:", res)
+    tree.parse_by_layer()
+
+
+
     # head = tree.pop_head()
     # print("\nhead:", head.val)
     # tree.parse_by_layer()
@@ -383,7 +392,30 @@ def main():
     return
 
 
+def unit_test():
+    N = 100
+    node_list = [float(round(random.randint(0, 10*N)/N, 3)) for _ in range(N)]
+    print("\n#:",len(node_list))
+    # print(node_list)
+
+    tree = BinarySearchTree()
+    for node in node_list:
+        tree.add_value(node)
+
+    tree.parse_by_layer()
+
+    for val in node_list:
+        target_node = tree.search_and_pop(val)
+        print("\ntarget_val:", val)
+        res = target_node.val if target_node else None
+        print("target_node:", res)
+        tree.parse_by_layer()
+
+    return
+
+
 if __name__=="__main__":
-    main()
+    # main()
+    unit_test()
     print("\nDone!\n")
 

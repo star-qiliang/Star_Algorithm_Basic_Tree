@@ -85,6 +85,10 @@ class Node:
             cur = cur.left
 
         parent.pop_left()
+
+        if cur.right:
+            parent.left = cur.right
+
         return cur
 
 
@@ -102,6 +106,10 @@ class Node:
             cur = cur.right
 
         parent.pop_right()
+
+        if cur.left:
+            parent.right = cur.left
+
         return cur
                         
     def search_and_pop(self, val):
@@ -139,14 +147,14 @@ class Node:
                 if new_root:
                     new_root.left = sub_left
                 else:
-                    new_root = None
+                    new_root = sub_left # ???
 
             else:
                 new_root = self.pop_left_most(sub_right)
                 if new_root:
                     new_root.right = sub_right
                 else:
-                    new_root = None
+                    new_root = sub_right # ???
 
             return target_node, new_root # new root
 

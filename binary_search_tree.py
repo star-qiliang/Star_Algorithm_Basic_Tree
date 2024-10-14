@@ -165,14 +165,14 @@ class Node:
                 target_node, new_root = node.left.search_and_pop(val)
 
                 if not target_node:
-                    return None, node
+                    return None, new_root
                 else:
-                    if target_node is node.left:
-                        node.pop_left()
+                    # if target_node is node.left:
+                    #     node.pop_left()
 
                     node.left = new_root
 
-                    return target_node, new_root
+                    return target_node, node
             
         else:
             if not node.right:
@@ -181,14 +181,14 @@ class Node:
                 target_node, new_root = node.right.search_and_pop(val)
 
                 if not target_node:
-                    return None, node
+                    return None, new_root
                 else:
-                    if target_node is node.right:
-                        node.pop_right()
+                    # if target_node is node.right:
+                    #     node.pop_right()
 
                     node.right = new_root
 
-                    return target_node, new_root
+                    return target_node, node
 
 
 
@@ -336,7 +336,38 @@ def main():
 
 
     target_val = 2093
-    # target_val = 2
+    target_node = tree.search_and_pop(target_val)
+    print("\ntarget_val:", target_val)
+    res = target_node.val if target_node else None
+    print("target_node:", res)
+    tree.parse_by_layer()
+
+    target_val = 48
+    target_node = tree.search_and_pop(target_val)
+    print("\ntarget_val:", target_val)
+    res = target_node.val if target_node else None
+    print("target_node:", res)
+    tree.parse_by_layer()
+
+
+    target_val = 478
+    target_node = tree.search_and_pop(target_val)
+    print("\ntarget_val:", target_val)
+    res = target_node.val if target_node else None
+    print("target_node:", res)
+    tree.parse_by_layer()
+
+
+
+    target_val = 236
+    target_node = tree.search_and_pop(target_val)
+    print("\ntarget_val:", target_val)
+    res = target_node.val if target_node else None
+    print("target_node:", res)
+    tree.parse_by_layer()
+
+
+    target_val = 999
     target_node = tree.search_and_pop(target_val)
     print("\ntarget_val:", target_val)
     res = target_node.val if target_node else None

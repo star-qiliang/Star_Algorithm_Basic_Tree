@@ -250,9 +250,17 @@ class BinarySearchTree:
 
 
 def main():
-    node_list = [1, 2, 86, 18, 5, 9, 20, 10, 21, 236, 0, 7, 904, 1006, 709, 57, 357, 48, 100, 478, 2093, 1238]
-    # N = 100000
-    # node_list = [float(round(random.randint(0, 10*N)/N, 3)) for _ in range(N)]
+    node_list = [1, 2, 86, 18, 5, 
+                 9, 20, 10, 21, 236, 
+                 0, 7, 904, 1006, 709, 
+                 57, 357, 48, 100, 478, 
+                 2093, 1238]
+    
+    # node_list = [1, 2, 3, 4, 5,
+    #              6, 7, 8, 9, 10,
+    #              11, 12, 13, 14, 15,
+    #              16, 17, 18, 19, 20
+    #              ]
 
     print("\n#:",len(node_list))
     # print(node_list)
@@ -350,7 +358,7 @@ def unit_test():
 
 
 if __name__=="__main__":
-    # main()
-    unit_test()
+    main()
+    # unit_test()
     print("\nDone!\n")
 

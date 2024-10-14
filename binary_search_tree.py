@@ -107,49 +107,64 @@ class Node:
     def search_and_pop(self, val):
         node = self
         if val == node.val:
-            sub_left = node.pop_left()
-            sub_right = node.pop_right()
+            target_node = node
+            sub_left = target_node.pop_left()
+            sub_right = target_node.pop_right()
+
+            if (not sub_left) and (not sub_right):
+                return target_node, None
+
             if random.randint(0,1):
-                res = self.pop_left_most(sub_right)
-                if res:
-                    res.left = sub_left
-                    res.right = sub_right
+                new_root = self.pop_left_most(sub_right)
+                if new_root:
+                    new_root.left = sub_left
+                    new_root.right = sub_right
                 else:
-                    res = sub_right 
+                    new_root = sub_right 
+                    new_root.left = sub_left
 
             else:
-                res = self.pop_right_most(sub_left)
-                if res:
-                    res.left = sub_left
-                    res.right = sub_right
+                new_root = self.pop_right_most(sub_left)
+                if new_root:
+                    new_root.left = sub_left
+                    new_root.right = sub_right
                 else:
-                    res = sub_left
+                    new_root = sub_left
+                    new_root.right = sub_right
 
-            return node, res # new root
+            return target_node, new_root # new root
 
         elif val < node.val:
             if not node.left:
                 return None, node
             else:
                 target_node, new_root = node.left.search_and_pop(val)
-                if target_node is node.left:
-                    node.pop_left()
 
-                node.left = new_root
+                if not target_node:
+                    return None, node
+                else:
+                    if target_node is node.left:
+                        node.pop_left()
 
-                return target_node, new_root
+                    node.left = new_root
+
+                    return target_node, new_root
             
         else:
             if not node.right:
                 return None, node
             else:
                 target_node, new_root = node.right.search_and_pop(val)
-                if target_node is node.right:
-                    node.pop_right()
 
-                node.right = new_root
+                if not target_node:
+                    return None, node
+                else:
+                    if target_node is node.right:
+                        node.pop_right()
 
-                return target_node, new_root
+                    node.right = new_root
+
+                    return target_node, new_root
 
 
 
@@ -297,6 +312,7 @@ def main():
 
 
     target_val = 2093
+    # target_val = 2
     target_node = tree.search_and_pop(target_val)
     print("\ntarget_val:", target_val)
     res = target_node.val if target_node else None

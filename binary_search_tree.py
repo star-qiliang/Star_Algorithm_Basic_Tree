@@ -70,12 +70,66 @@ class Node:
             else:
                 res = node.right.search(val)
                 return res
-                        
-    def search_and_pop(self, val):
+            
+    def pop_left_most(self, node):
         pass
 
+        res = node
+        return res
 
+    def pop_right_most(self, node):
+        pass
 
+        res = node
+        return res
+
+                        
+    def search_and_pop(self, val):
+        node = self
+        if val == node.val:
+            sub_left = node.pop_left()
+            sub_right = node.pop_right()
+            if random.randint(0,1):
+                res = self.pop_left_most(sub_right)
+                if res:
+                    res.left = sub_left
+                    res.right = sub_right
+                else:
+                    res = sub_right 
+
+            else:
+                res = self.pop_right_most(sub_left)
+                if res:
+                    res.left = sub_left
+                    res.right = sub_right
+                else:
+                    res = sub_left
+
+            return node, res # new root
+
+        elif val < node.val:
+            if not node.left:
+                return None, node
+            else:
+                target_node, new_root = node.left.search_and_pop(val)
+                if target_node is node.left:
+                    node.pop_left()
+
+                node.left = new_root
+
+                return target_node, new_root
+            
+        else:
+            if not node.right:
+                return None, node
+            else:
+                target_node, new_root = node.right.search_and_pop(val)
+                if target_node is node.right:
+                    node.pop_right()
+
+                node.right = new_root
+
+                return target_node, new_root
 
 
 
@@ -96,6 +150,13 @@ class BinarySearchTree:
     def search(self, val):
         res = self.head.search(val)
         return res
+    
+
+    def search_and_pop(self, val):
+        target_node, new_root = self.head.search_and_pop(val)
+        self.head = new_root
+        return target_node
+
 
 
     def pop_bottom(self): # for pop_head()

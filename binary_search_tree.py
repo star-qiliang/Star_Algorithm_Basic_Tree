@@ -17,28 +17,6 @@ class Node:
         self.right = None
         return node
 
-    def random_add_node(self, node):
-        if type(node)!= Node:
-            node = Node(node)
-
-        if (not self.left) and (not self.right):
-            if random.randint(0,1):
-                self.left = node
-            else:
-                self.right = node
-
-        elif not self.left:
-            self.left = node
-
-        elif not self.right:
-            self.right = node
-
-        else:
-            if random.randint(0,1):
-                self.left.random_add_node(node)
-            else:
-                self.right.random_add_node(node)
-
     def binary_search_add_node(self, node):
         if type(node)!= Node:
             node = Node(node)
@@ -156,6 +134,7 @@ class Node:
                     new_root = sub_right # sub_right has no left 
 
             return target_node, new_root
+            
 
         elif val < node.val:
             if not node.left:
